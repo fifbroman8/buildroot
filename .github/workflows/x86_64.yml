@@ -50,7 +50,7 @@ jobs:
       with:
         # 🚨 终极安全防线：把你刚刚编译出来的、没有任何外部动态纠缠的单文件绝对路径死死锁在这里 [|]
         files: |
-          x86_64-buildroot-linux-musl_sdk-buildroot.tar.gz 
+          output/images/x86_64-buildroot-linux-musl_sdk-buildroot.tar.gz 
         # 自动将你当前触发的 Git Tag 名字（如 v1.0.0）作为 Release 的官方大标题 [|]
         name: "Release ${{ github.ref_name }}"
         # 自动生成更新日志（Markdown 格式） [|]

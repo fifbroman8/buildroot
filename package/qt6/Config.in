@@ -5,7 +5,8 @@ config BR2_PACKAGE_QT6_ARCH_SUPPORTS
 	default y if BR2_ARM_CPU_ARMV5 || BR2_ARM_CPU_ARMV6 || BR2_ARM_CPU_ARMV7A || BR2_ARM_CPU_ARMV8A
 	default y if BR2_i386
 	default y if BR2_x86_64
-	default y if BR2_mips || BR2_mipsel || BR2_mips64 || BR2_mips64el
+	default y if BR2_riscv
+	default y if BR2_mips || BR2_mipsel || BR2_mips64 || BR2_mips64el || BR2_loongarch64
 	default y if BR2_powerpc || BR2_powerpc64 || BR2_powerpc64le
 	# sparc 32-bit is supposedly supported, but has issues due to
 	# the need of libatomic

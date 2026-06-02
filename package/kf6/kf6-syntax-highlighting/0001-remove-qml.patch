@@ -1,0 +1,22 @@
+--- kf6-syntax-highlighting-6.26.0/CMakeLists.txt	2026-05-01 11:56:50.000000000 +0000
++++ kf6-syntax-highlighting-6.26.0a/CMakeLists.txt	2026-07-17 11:05:50.532392907 +0000
+@@ -39,16 +39,16 @@
+ # Dependencies
+ #
+ set(REQUIRED_QT_VERSION 6.9.0)
+-find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE REQUIRED COMPONENTS Core Network Test)
++find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE REQUIRED COMPONENTS Core Network)
+ option(KSYNTAXHIGHLIGHTING_USE_GUI "Build components depending on QtGui" ON)
+ if(KSYNTAXHIGHLIGHTING_USE_GUI)
+     find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE REQUIRED COMPONENTS Gui)
+ endif()
+-find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE QUIET OPTIONAL_COMPONENTS PrintSupport Widgets Quick)
++find_package(Qt6 ${REQUIRED_QT_VERSION} NO_MODULE QUIET OPTIONAL_COMPONENTS PrintSupport Widgets)
+ set_package_properties(Qt6 PROPERTIES URL "http://qt-project.org/")
+ set_package_properties(Qt6Widgets PROPERTIES PURPOSE "Example application.")
+ set_package_properties(Qt6PrintSupport PROPERTIES PURPOSE "Example application.")
+-set_package_properties(Qt6Quick PROPERTIES PURPOSE "QtQuick bindings.")
++#set_package_properties(Qt6Quick PROPERTIES PURPOSE "QtQuick bindings.")
+ 
+ # https://xerces.apache.org/index.html for validation
+ find_package (XercesC)

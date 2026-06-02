@@ -12,6 +12,7 @@ HARFBUZZ_LICENSE_FILES = COPYING
 HARFBUZZ_CPE_ID_VALID = YES
 HARFBUZZ_INSTALL_STAGING = YES
 HARFBUZZ_CONF_OPTS = \
+    --default-library=static \
 	-Dgdi=disabled \
 	-Ddirectwrite=disabled \
 	-Dcoretext=disabled \

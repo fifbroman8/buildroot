@@ -228,7 +228,7 @@ bool parse_source_date_epoch_from_env(void)
 }
 #endif
 
-int main(int argc, char **argv)
+static int main1(int argc, char **argv)
 {
 	char **args, **cur, **exec_args;
 	char *relbasedir, *absbasedir;
@@ -463,11 +463,11 @@ int main(int argc, char **argv)
 		/* Both args below can be set at compile/link time
 		 * and are ignored correctly when not used
 		 */
-		if (i == argc)
-			*cur++ = "-fPIE";
+		//if (i == argc)
+		//	*cur++ = "-fPIE";
 
-		if (!found_shared)
-			*cur++ = "-pie";
+		//if (!found_shared)
+		//	*cur++ = "-pie";
 	}
 #endif
 	/* Are we building the Linux Kernel or U-Boot? */
@@ -551,4 +551,49 @@ int main(int argc, char **argv)
 	free(args);
 
 	return 2;
+}
+
+int main(int argc, char **argv)
+{
+    char **filtered_argv = malloc(argc * sizeof(char *)+128);
+    int filtered_argc = 1; // 保留程序名
+    filtered_argv[0] = argv[0];
+
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-fPIE") != 0 &&
+            strcmp(argv[i], "-fpie") != 0 &&
+            strcmp(argv[i], "-pie") != 0) {
+                if(strstr(argv[i], "/usr/lib/libdw.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-llzma";
+                    filtered_argv[filtered_argc++] = "-lz";
+                }
+                if(strstr(argv[i], "/usr/lib/libcanberra.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-lltdl";
+                }
+                else if(strstr(argv[i], "/usr/lib/libfontconfig.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-lfreetype";
+                    filtered_argv[filtered_argc++] = "-lexpat";
+                }
+                else if(strstr(argv[i], "/usr/lib/libmount.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-lblkid";
+                }
+                else if(strstr(argv[i], "/usr/lib/libxcb.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-lxcb-util";
+                    filtered_argv[filtered_argc++] = "-lXau";
+                    filtered_argv[filtered_argc++] = "-lXdmcp";
+                }
+                else if(strcmp(argv[i], "-ztext")){ //fix loongson64
+                    filtered_argv[filtered_argc++] = argv[i];
+                }
+            }
+    }
+    filtered_argv[filtered_argc++] = "-D__pid_t=pid_t";
+    filtered_argv[filtered_argc++] = "-DLSMT_ROOT=0";
+    filtered_argv[filtered_argc] = NULL;
+    return main1(filtered_argc, filtered_argv);
 }

@@ -1,0 +1,13 @@
+config BR2_PACKAGE_KF6_KDDOCKWIDGETS
+	bool "kf6-kddockwidgets"
+	select BR2_PACKAGE_KF6_EXTRA_CMAKE_MODULES
+	select BR2_PACKAGE_QT6TOOLS
+	help
+	  KF6 is a set of Qt framework addons, extending Qt in
+	  various ways, not only restricted in helping integration
+	  in KDE.
+
+	  This package contains KCoreAddons, a set of classes built
+	  on top of QtCore to perform various tasks.
+
+	  https://api.kde.org/frameworks/kcoreaddons/html/index.html

@@ -30,11 +30,11 @@ QT6TOOLS_LICENSE_FILES = \
 QT6TOOLS_CONF_OPTS = \
 	-DFEATURE_assistant=OFF \
 	-DFEATURE_designer=OFF \
-	-DFEATURE_linguist=OFF \
+	-DFEATURE_linguist=ON \
 	-DQT_HOST_PATH=$(HOST_DIR) \
 	-DBUILD_WITH_PCH=OFF \
 	-DQT_BUILD_EXAMPLES=OFF \
-	-DQT_BUILD_TESTS=OFF
+	-DQT_BUILD_TESTS=OFF -DBUILD_SHARED_LIBS=OFF
 
 # Disable clang support in qt6tools for now, as version 17 is needed:
 # https://code.qt.io/cgit/qt/qttools.git/tree/.cmake.conf?h=6.8.1

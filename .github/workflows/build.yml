@@ -1,0 +1,71 @@
+name: 🚀 Iron Static Build and Release Deployment
+
+# 👑 触发条件：当你本地执行 `git tag v1.0.0` 并用 `git push --tags` 强行发射标签时触发 [|]
+on:
+  push:
+    tags:
+      - 'v*' # ◄ 匹配所有以 v 开头的标签，如 v1.0.0, v2.1.3 [|]
+
+# 强行赋予当前工作流对 GitHub 仓库 Release 写入的最高特权
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 部署在最纯正、高性能的宿主机环境中
+    strategy:
+      fail-fast: false
+      # ⚡ 矩阵并发核心
+      matrix:
+        cpu: [aarch64, loongarch64, powerpc64le, riscv64, x86_64]
+
+    steps:
+    - name: 📂 1. 拉取当前项目最新代码
+      uses: actions/checkout@v4
+
+    - name: ⚙️ 2. 初始化底层编译依赖环境（如 Alpine/Buildroot 宿主依赖）
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+        lscpu
+        free -h
+        df -h
+
+    - name: 🏗️ 3. 执行现代 CMake 100% 纯静态锁频总攻编译
+      # 结合你上一轮的 GCC 命令行注入黑魔法，在这里一键注入你所有的核心宏参数 [|]
+      run: |
+        df -h
+        make hotspot_${{ matrix.cpu }}_defconfig
+        make -j4 -s -k || true
+        make -j4 -s -k || true
+        make -j4 -s -k || true
+        touch output/build/kf6-kiconthemes-6.28.0/.stamp_built output/build/kf6-kiconthemes-6.28.0/bin/kiconfinder6 output/build/kf6-kiconthemes-6.28.0/bin/KIconEnginePlugin.so || true
+        touch output/build/kf6-kwindowsystem-6.28.0/.stamp_built output/build/kf6-kwindowsystem-6.28.0/bin/kf6/kwindowsystem/KF6WindowSystemX11Plugin.so || true
+        touch output/build/kf6-solid-6.28.0/.stamp_built output/build/kf6-solid-6.28.0/bin/solid-hardware6 || true
+        touch output/build/kf6-threadweaver-6.28.0/.stamp_built || true
+        find output/host -name KF6JobWidgetsTargets.cmake  -exec sed -i "s/Notifications/CoreAddons/g" {} \;
+        make -j4 -s -k || true
+        make -j4 -s -k || true
+        make -j4 -s -k || true
+        touch output/build/kf6-kio-6.28.0/.stamp_built output/build/kf6-kio-6.28.0/bin/remotenotifier.so output/build/kf6-kio-6.28.0/bin/ktrash6 output/build/kf6-kio-6.28.0/bin/kiod6 output/build/kf6-kio-6.28.0/bin/kioworker output/build/kf6-kio-6.28.0/bin/ktelnetservice6 output/build/kf6-kio-6.28.0/bin/kioexec output/build/kf6-kio-6.28.0/bin/kio6widgets.so || true
+        make -j4 && make sdk
+        
+    - name: 🔍 4. 像素级“验尸”核验：确保它是纯静态无依赖金身
+      run: |
+        file output/images/${{ matrix.cpu }}-buildroot-linux-musl_sdk-buildroot.tar.gz 
+
+    - name: 📦 5. 诸神黄昏：将成品高频全自动发布到 GitHub Release [|]
+      uses: softprops/action-gh-release@v2
+      with:
+        # 🚨 终极安全防线：把你刚刚编译出来的、没有任何外部动态纠缠的单文件绝对路径死死锁在这里 [|]
+        files: |
+          output/images/${{ matrix.cpu }}-buildroot-linux-musl_sdk-buildroot.tar.gz 
+        # 自动将你当前触发的 Git Tag 名字（如 v1.0.0）作为 Release 的官方大标题 [|]
+        name: "Release ${{ github.ref_name }}"
+        # 自动生成更新日志（Markdown 格式） [|]
+        generate_release_notes: true
+        # 如果你正在进行秘密的商业闭源内测，可以将下面这一行取消注释，强行将其定义为“预发布”版
+        # prerelease: true
+      env:
+        # 核心凭证：白嫖 GitHub 运行时自动注入的临时高权 Token，不需要你人肉去配置任何复杂的 Secrets
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

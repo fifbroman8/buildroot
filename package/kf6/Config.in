@@ -1,0 +1,40 @@
+menuconfig BR2_PACKAGE_KF6
+	bool "KF6"
+	depends on BR2_PACKAGE_QT6
+	help
+	  This option enables the KF5 KDE Frameworks. Sub-options
+	  allow to select which modules should be built.
+
+	  https://techbase.kde.org/KDE_Frameworks
+
+if BR2_PACKAGE_KF6
+source "package/kf6/kf6-extra-cmake-modules/Config.in"
+source "package/kf6/kf6-kcoreaddons/Config.in"
+source "package/kf6/kf6-threadweaver/Config.in"
+source "package/kf6/kf6-kconfigwidgets/Config.in"
+source "package/kf6/kf6-kcodecs/Config.in"
+source "package/kf6/kf6-kconfig/Config.in"
+source "package/kf6/kf6-kguiaddons/Config.in"
+source "package/kf6/kf6-ki18n/Config.in"
+source "package/kf6/kf6-kwidgetsaddons/Config.in"
+source "package/kf6/kf6-kcolorscheme/Config.in"
+source "package/kf6/kf6-kitemviews/Config.in"
+source "package/kf6/kf6-kitemmodels/Config.in"
+source "package/kf6/kf6-kio/Config.in"
+source "package/kf6/kf6-kservice/Config.in"
+source "package/kf6/kf6-solid/Config.in"
+source "package/kf6/kf6-kcrash/Config.in"
+source "package/kf6/kf6-kwindowsystem/Config.in"
+source "package/kf6/kf6-kbookmarks/Config.in"
+source "package/kf6/kf6-kcompletion/Config.in"
+source "package/kf6/kf6-kiconthemes/Config.in"
+source "package/kf6/kf6-karchive/Config.in"
+source "package/kf6/kf6-kjobwidgets/Config.in"
+source "package/kf6/kf6-knotifications/Config.in"
+source "package/kf6/kf6-kdbusaddons/Config.in"
+source "package/kf6/kf6-kparts/Config.in"
+source "package/kf6/kf6-kxmlgui/Config.in"
+source "package/kf6/kf6-kddockwidgets/Config.in"
+source "package/kf6/kf6-kglobalaccel/Config.in"
+source "package/kf6/kf6-syntax-highlighting/Config.in"
+endif

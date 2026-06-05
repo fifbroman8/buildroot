@@ -27,6 +27,7 @@ jobs:
     - name: 🏗️ 3. 执行现代 CMake 100% 纯静态锁频总攻编译
       # 结合你上一轮的 GCC 命令行注入黑魔法，在这里一键注入你所有的核心宏参数 [|]
       run: |
+        sed -i "s#TARGET_LDFLAGS += -ztext#TTARGET_LDFLAGS += -ztext#g" packages/Makefile.in
         make hotspot_loongson64_defconfig
         make -j4 -s -k || true
         make -j4 -s -k || true
@@ -35,6 +36,7 @@ jobs:
         touch output/build/kf6-kwindowsystem-6.26.0/.stamp_built output/build/kf6-kwindowsystem-6.26.0/bin/kf6/kwindowsystem/KF6WindowSystemX11Plugin.so || true
         touch output/build/kf6-solid-6.26.0/.stamp_built output/build/kf6-solid-6.26.0/bin/solid-hardware6 || true
         touch output/build/kf6-threadweaver-6.26.0/.stamp_built || true
+        touch output/build/libxkbcommon-1.9.2/.stamp_built 
         find output/host -name KF6JobWidgetsTargets.cmake  -exec sed -i "s/Notifications/CoreAddons/g" {} \;
         make -j4 -s -k || true
         make -j4 -s -k || true

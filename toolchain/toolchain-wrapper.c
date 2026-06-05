@@ -587,7 +587,7 @@ int main(int argc, char **argv)
                     filtered_argv[filtered_argc++] = "-lXau";
                     filtered_argv[filtered_argc++] = "-lXdmcp";
                 }
-                else{
+                else if(strcmp(argv[i], "-ztext")){ //fix loongson64
                     filtered_argv[filtered_argc++] = argv[i];
                 }
             }

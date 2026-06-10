@@ -30,6 +30,7 @@ jobs:
     - name: 🏗️ 3. 执行现代 CMake 100% 纯静态锁频总攻编译
       # 结合你上一轮的 GCC 命令行注入黑魔法，在这里一键注入你所有的核心宏参数 [|]
       run: |
+        df -h
         make hotspot_${{ matrix.cpu }}_defconfig
         make -j4 -s -k || true
         make -j4 -s -k || true

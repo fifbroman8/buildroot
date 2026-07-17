@@ -26,6 +26,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y wget
+        lscpu
+        free -h
+        df -h
 
     - name: 🏗️ 3. 执行现代 CMake 100% 纯静态锁频总攻编译
       # 结合你上一轮的 GCC 命令行注入黑魔法，在这里一键注入你所有的核心宏参数 [|]

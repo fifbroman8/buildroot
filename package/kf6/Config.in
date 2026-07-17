@@ -36,4 +36,5 @@ source "package/kf6/kf6-kparts/Config.in"
 source "package/kf6/kf6-kxmlgui/Config.in"
 source "package/kf6/kf6-kddockwidgets/Config.in"
 source "package/kf6/kf6-kglobalaccel/Config.in"
+source "package/kf6/kf6-syntax-highlighting/Config.in"
 endif

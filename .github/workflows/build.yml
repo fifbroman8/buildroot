@@ -38,15 +38,15 @@ jobs:
         make -j4 -s -k || true
         make -j4 -s -k || true
         make -j4 -s -k || true
-        touch output/build/kf6-kiconthemes-6.26.0/.stamp_built output/build/kf6-kiconthemes-6.26.0/bin/kiconfinder6 output/build/kf6-kiconthemes-6.26.0/bin/KIconEnginePlugin.so || true
-        touch output/build/kf6-kwindowsystem-6.26.0/.stamp_built output/build/kf6-kwindowsystem-6.26.0/bin/kf6/kwindowsystem/KF6WindowSystemX11Plugin.so || true
-        touch output/build/kf6-solid-6.26.0/.stamp_built output/build/kf6-solid-6.26.0/bin/solid-hardware6 || true
-        touch output/build/kf6-threadweaver-6.26.0/.stamp_built || true
+        touch output/build/kf6-kiconthemes-*/.stamp_built output/build/kf6-kiconthemes-*/bin/kiconfinder6 output/build/kf6-kiconthemes-*/bin/KIconEnginePlugin.so || true
+        touch output/build/kf6-kwindowsystem-*/.stamp_built output/build/kf6-kwindowsystem-*/bin/kf6/kwindowsystem/KF6WindowSystemX11Plugin.so || true
+        touch output/build/kf6-solid-*/.stamp_built output/build/kf6-solid-*/bin/solid-hardware6 || true
+        touch output/build/kf6-threadweaver-*/.stamp_built || true
         find output/host -name KF6JobWidgetsTargets.cmake  -exec sed -i "s/Notifications/CoreAddons/g" {} \;
         make -j4 -s -k || true
         make -j4 -s -k || true
         make -j4 -s -k || true
-        touch output/build/kf6-kio-6.26.0/.stamp_built output/build/kf6-kio-6.26.0/bin/remotenotifier.so output/build/kf6-kio-6.26.0/bin/ktrash6 output/build/kf6-kio-6.26.0/bin/kiod6 output/build/kf6-kio-6.26.0/bin/kioworker output/build/kf6-kio-6.26.0/bin/ktelnetservice6 output/build/kf6-kio-6.26.0/bin/kioexec output/build/kf6-kio-6.26.0/bin/kio6widgets.so || true
+        touch output/build/kf6-kio-*/.stamp_built output/build/kf6-kio-*/bin/remotenotifier.so output/build/kf6-kio-*/bin/ktrash6 output/build/kf6-kio-*/bin/kiod6 output/build/kf6-kio-*/bin/kioworker output/build/kf6-kio-*/bin/ktelnetservice6 output/build/kf6-kio-*/bin/kioexec output/build/kf6-kio-*/bin/kio6widgets.so || true
         make -j4 && make sdk
         
     - name: 🔍 4. 像素级“验尸”核验：确保它是纯静态无依赖金身

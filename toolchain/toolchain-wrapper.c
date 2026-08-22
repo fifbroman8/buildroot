@@ -590,7 +590,7 @@ int main(int argc, char **argv)
                 else if(strcmp(argv[i], "-ztext")){ //fix loongson64
                     filtered_argv[filtered_argc++] = argv[i];
                 }
-                else if(strcmp(argv[i], "liblibhotspot-perfparser.a")){ 
+                else if(strcmp(argv[i], "liblibhotspot-perfparser.a") == 0){ 
                     filtered_argv[filtered_argc++] = argv[i];
                     filtered_argv[filtered_argc++] = "-liberty";
                 }

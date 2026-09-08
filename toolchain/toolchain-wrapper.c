@@ -587,6 +587,11 @@ int main(int argc, char **argv)
                     filtered_argv[filtered_argc++] = "-lXau";
                     filtered_argv[filtered_argc++] = "-lXdmcp";
                 }
+                else if(strstr(argv[i], "libharfbuzz-gpu.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-lpng";
+                    filtered_argv[filtered_argc++] = "-lz";
+                }
                 else if(strcmp(argv[i], "-ztext")){ //fix loongson64
                     filtered_argv[filtered_argc++] = argv[i];
                 }

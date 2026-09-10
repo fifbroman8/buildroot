@@ -3,8 +3,8 @@ name: 🚀 Iron Static Build and Release Deployment
 # 👑 触发条件：当你本地执行 `git tag v1.0.0` 并用 `git push --tags` 强行发射标签时触发 [|]
 on:
   push:
-    branches:
-      - '2026.02.x'
+    tags:
+      - "v*"
 
 # 强行赋予当前工作流对 GitHub 仓库 Release 写入的最高特权
 permissions:

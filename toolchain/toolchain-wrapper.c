@@ -581,6 +581,11 @@ int main(int argc, char **argv)
                     filtered_argv[filtered_argc++] = argv[i];
                     filtered_argv[filtered_argc++] = "-lblkid";
                 }
+                else if(strstr(argv[i], "/usr/lib/libfreetype.a")){
+                    filtered_argv[filtered_argc++] = argv[i];
+                    filtered_argv[filtered_argc++] = "-lpng";
+                    filtered_argv[filtered_argc++] = "-lz";
+                }
                 else if(strstr(argv[i], "/usr/lib/libxcb.a")){
                     filtered_argv[filtered_argc++] = argv[i];
                     filtered_argv[filtered_argc++] = "-lxcb-util";

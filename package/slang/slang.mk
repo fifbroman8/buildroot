@@ -52,6 +52,7 @@ SLANG_DEPENDENCIES += readline
 ifeq ($(BR2_STATIC_LIBS),y)
 SLANG_CONF_ENV += LIBS="`$(STAGING_DIR)/usr/bin/$(NCURSES_CONFIG_SCRIPTS) --libs`"
 endif
+endif
 
 SLANG_MAKE_OPTS = static
 SLANG_INSTALL_STAGING_OPTS = DESTDIR=$(STAGING_DIR) install-static
